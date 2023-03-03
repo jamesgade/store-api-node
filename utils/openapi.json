@@ -1,0 +1,137 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Store API",
+        "description": "API for e-commerce store",
+        "version": "1.0.0"
+    },
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/api/v1",
+    "produces": [
+        "applocation/json"
+    ],
+    "paths": {
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "description": "products of my store",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "searches for given name in product names",
+                        "type": "string"
+                    },
+                    {
+                        "name": "featured",
+                        "in": "query",
+                        "description": "get featured/unfeatured products",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "number of products per response",
+                        "type": "number",
+                        "default": 10
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "response pagination",
+                        "type": "number",
+                        "default": 1
+                    },
+                    {
+                        "name": "company",
+                        "in": "query",
+                        "description": "filter by specific company",
+                        "enum": [
+                            "ikea",
+                            "liddy",
+                            "caressa",
+                            "marcos"
+                        ],
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sorting by price or rating Eg: use 'price' for ascending, '-price' for decending",
+                        "type": "string",
+                        "default": "createdAt",
+                        "enum": [
+                            "price",
+                            "-price",
+                            "rating",
+                            "-rating",
+                            "name",
+                            "-name",
+                            "createdAt",
+                            "-createdAt"
+                        ]
+                    },
+                    {
+                        "name": "numericFilters",
+                        "in": "query",
+                        "description": "filter price, rating by using >,<,>=,<=,=",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of products",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Product": {
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "description": "id of the product"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name of the product"
+                },
+                "featured": {
+                    "type": "boolean",
+                    "description": "wheter the product is featured or not"
+                },
+                "price": {
+                    "type": "number",
+                    "description": "price of the product"
+                },
+                "rating": {
+                    "type": "number",
+                    "description": "rating of the product"
+                },
+                "company": {
+                    "type": "string",
+                    "description": "name of the company/brand"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "product release date"
+                },
+                "__v": {
+                    "type": "number",
+                    "description": "0"
+                }
+            }
+        }
+    }
+}
