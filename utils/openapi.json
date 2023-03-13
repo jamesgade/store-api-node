@@ -10,7 +10,7 @@
     ],
     "basePath": "/api/v1",
     "produces": [
-        "applocation/json"
+        "application/json"
     ],
     "paths": {
         "/products": {
